@@ -1,10 +1,0 @@
-
-Z	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(ÃÊ n
-Z	java:S1122"FDefine and throw a dedicated exception instead of using a generic one.(¾ÝÊY
-X
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄÞ
-X
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄÞ
-E	java:S106'"+Replace this use of System.out by a logger.(¡Åþãþÿÿÿÿ
-]
-java:S20949"BRemove this empty class, write its code or make it an "interface".(¦Á¦¼ýÿÿÿÿ
