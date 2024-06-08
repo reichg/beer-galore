@@ -17,36 +17,39 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> 
 
     @Autowired
     private JwtUtil jwtUtil;
-    public AuthFilter() {
+
+    public AuthFilter()
+    {
         super(Config.class);
     }
 
     @Override
-    public GatewayFilter apply(Config config) {
-        return ((exchange, chain) -> {
+    public GatewayFilter apply(Config config)
+    {
+        return ((exchange, chain) ->
+        {
             ServerHttpRequest request = null;
-            if (routeValidator.isSecured.test(exchange.getRequest())) {
-                if (!exchange.getRequest().getHeaders().containsKey(HttpHeaders.AUTHORIZATION)) {
+            if (routeValidator.isSecured.test(exchange.getRequest()))
+            {
+                if (!exchange.getRequest().getHeaders().containsKey(HttpHeaders.AUTHORIZATION))
+                {
                     throw new RuntimeException("Missing authorization header");
                 }
                 String authHeader = exchange.getRequest().getHeaders().get(HttpHeaders.AUTHORIZATION).get(0);
                 String token = "";
-                if (authHeader != null && authHeader.startsWith("Bearer ")) {
+                if (authHeader != null && authHeader.startsWith("Bearer "))
+                {
                     token = authHeader.substring(7);
                 }
 
-                try {
+                try
+                {
                     System.out.println("checking token in header");
                     jwtUtil.validateToken(token);
 
-                    request = exchange.getRequest()
-                            .mutate()
-                            .header(
-                                    "user", jwtUtil.extractUser(token)
-                            )
-                            .build();
-
-                } catch (Exception e) {
+                    request = exchange.getRequest().mutate().header("user", jwtUtil.extractUser(token)).build();
+                } catch (Exception e)
+                {
                     throw new RuntimeException("Unauthorized access to application.");
                 }
             }
@@ -57,5 +60,4 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> 
     public static class Config {
 
     }
-
 }

@@ -12,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class UserHomeDTO {
+    List<BeerItemDTO> triedBeers;
     private int userId;
     private String firstName;
     private String lastName;
@@ -19,8 +20,6 @@ public class UserHomeDTO {
     private String username;
     private String phone;
     private Integer age;
-//    private String password;
+    //    private String password;
     private String roles;
-
-    List<BeerItemDTO> triedBeers;
 }

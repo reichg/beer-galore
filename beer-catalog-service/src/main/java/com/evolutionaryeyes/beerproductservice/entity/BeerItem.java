@@ -32,12 +32,13 @@ public class BeerItem {
     private Double abv;
 
     @Column(nullable = false)
-    private Double ibu;
+    private int ibu;
 
     @Column(nullable = false)
     private String type;
 
-    public BeerItem fromDto(BeerItemDTO beerItemDTO) {
+    public BeerItem fromDto(BeerItemDTO beerItemDTO)
+    {
         this.setName(beerItemDTO.getName());
         this.setDescription(beerItemDTO.getDescription());
         this.setBrewery(beerItemDTO.getBrewery());

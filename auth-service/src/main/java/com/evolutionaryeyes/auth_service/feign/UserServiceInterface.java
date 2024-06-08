@@ -10,6 +10,4 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface UserServiceInterface {
     @PostMapping("api/user/saveUser")
     public ResponseEntity<UserDTO> saveUser(@RequestBody UserDTO userDto);
-
-
 }

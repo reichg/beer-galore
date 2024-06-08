@@ -10,7 +10,8 @@ import java.util.Optional;
 
 @Repository
 public interface BeerTriedRepository extends JpaRepository<BeerTriedEntity, Integer> {
-    Optional<BeerTriedEntity> findByUserIdAndBeerItemId(int userId, int beerItemId);
+    Optional<BeerTriedEntity> findByUserIdAndBeerItemId(int userId, int beerItemId
+    );
 
     @Query("SELECT beerItemId FROM BeerTriedEntity bte WHERE bte.userId = ?1")
     List<Integer> findAllByUserId(int userId);

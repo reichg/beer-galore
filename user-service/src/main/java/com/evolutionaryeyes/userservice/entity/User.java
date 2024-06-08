@@ -47,7 +47,8 @@ public class User {
 
     private String roles;
 
-    public User fromDto(UserDTO userDTO) {
+    public User fromDto(UserDTO userDTO)
+    {
         this.setFirstName(userDTO.getFirstName());
         this.setLastName(userDTO.getLastName());
         this.setAge(userDTO.getAge());

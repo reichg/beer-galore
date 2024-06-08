@@ -16,6 +16,4 @@ public class BeerItemDTO {
     private Double abv;
     private Double ibu;
     private String type;
-
-
 }

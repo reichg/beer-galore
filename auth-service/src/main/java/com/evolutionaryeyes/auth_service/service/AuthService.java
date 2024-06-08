@@ -8,6 +8,7 @@ public interface AuthService {
     public String saveUser(UserCredentialDTO userCredentialDTO);
 
     public String generateToken(UserCredentialDTO userCredentialDTO) throws JsonProcessingException;
+
     public void validateToken(String token);
 
     UserCredentialDTO findByUsername(String username);

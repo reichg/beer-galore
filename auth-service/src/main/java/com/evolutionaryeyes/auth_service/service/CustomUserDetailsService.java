@@ -14,11 +14,14 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
     UserCredentialRepository userCredentialRepository;
+
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
+    {
 
         Optional<UserCredential> existingUser = userCredentialRepository.findByUsername(username);
 
-        return existingUser.map(CustomUserDetails::new).orElseThrow(() -> new UsernameNotFoundException("user not found with name: " + username));
+        return existingUser.map(CustomUserDetails::new)
+                           .orElseThrow(() -> new UsernameNotFoundException("user not found with name: " + username));
     }
 }

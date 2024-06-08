@@ -22,34 +22,37 @@ import org.springframework.security.web.SecurityFilterChain;
 public class AuthConfig {
 
     @Bean
-    public UserDetailsService userDetailsService() {
+    public UserDetailsService userDetailsService()
+    {
         return new CustomUserDetailsService();
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        return httpSecurity
-                .csrf(
-                        AbstractHttpConfigurer::disable
-                )
-                .authorizeHttpRequests(
-                        r -> r.requestMatchers("/auth/register", "/auth/generateToken", "/auth/validateToken").permitAll()
-                )
-                .build();
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception
+    {
+        return httpSecurity.csrf(AbstractHttpConfigurer::disable)
+                           .authorizeHttpRequests(r -> r.requestMatchers("/auth/register",
+                                                                         "/auth/generateToken",
+                                                                         "/auth/validateToken"
+                           ).permitAll())
+                           .build();
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder()
+    {
         return new BCryptPasswordEncoder(11);
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception
+    {
         return configuration.getAuthenticationManager();
     }
 
     @Bean
-    public AuthenticationProvider authenticationProvider() {
+    public AuthenticationProvider authenticationProvider()
+    {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userDetailsService());
         authenticationProvider.setPasswordEncoder(passwordEncoder());
@@ -57,12 +60,14 @@ public class AuthConfig {
     }
 
     @Bean
-    public ModelMapper mapper() {
+    public ModelMapper mapper()
+    {
         return new ModelMapper();
     }
 
     @Bean
-    public ObjectMapper objectMapper() {
+    public ObjectMapper objectMapper()
+    {
         return new ObjectMapper();
     }
 }

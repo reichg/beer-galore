@@ -10,21 +10,32 @@ import java.util.Optional;
 
 public interface BeerItemService {
 
-    ResponseEntity<Page<BeerItemDTO>> getAllBeerItems(Optional<Integer> page, Optional<Integer> size, Optional<String> sortBy, Optional<Sort.Direction> sortDirection);
+    Page<BeerItemDTO> getAllBeerItems(Optional<Integer> page,
+                                                      Optional<Integer> size,
+                                                      Optional<String> sortBy,
+                                                      Optional<Sort.Direction> sortDirection
+    );
 
-    ResponseEntity<BeerItemDTO> saveNewBeerItem(BeerItemDTO beerItemDTO);
+    BeerItemDTO saveNewBeerItem(BeerItemDTO beerItemDTO);
 
-    ResponseEntity<List<BeerItemDTO>> saveNewBeerItems(List<BeerItemDTO> beerItemDTOs);
+    List<BeerItemDTO> saveNewBeerItems(List<BeerItemDTO> beerItemDTOs);
 
-    ResponseEntity<BeerItemDTO> deleteBeerItem(int id) throws Exception;
+    BeerItemDTO deleteBeerItem(int id) throws Exception;
 
-    ResponseEntity<BeerItemDTO> getBeerById(int id) throws Exception;
+    BeerItemDTO getBeerById(int id) throws Exception;
 
-    ResponseEntity<BeerItemDTO> updateBeerItem(int id, BeerItemDTO beerItemDTO) throws Exception;
+    BeerItemDTO updateBeerItem(int id, BeerItemDTO beerItemDTO
+    ) throws Exception;
 
-    ResponseEntity<BeerItemDTO> addBeerItemToUserList(int beerItemId, int userId, int rating);
+    BeerItemDTO addBeerItemToUserList(int beerItemId, int userId, int rating
+    );
 
-    ResponseEntity<List<BeerItemDTO>> getBeersByIds(List<Integer> ids);
+    List<BeerItemDTO> getBeersByIds(List<Integer> ids);
 
-    ResponseEntity<Page<BeerItemDTO>> getBeerItemsWithSearch(Optional<Integer> page, Optional<Integer> size, Optional<String> sortBy, Optional<Sort.Direction> sortDirection, Optional<String> query);
+    Page<BeerItemDTO> getBeerItemsWithSearch(Optional<Integer> page,
+                                                             Optional<Integer> size,
+                                                             Optional<String> sortBy,
+                                                             Optional<Sort.Direction> sortDirection,
+                                                             Optional<String> query
+    );
 }

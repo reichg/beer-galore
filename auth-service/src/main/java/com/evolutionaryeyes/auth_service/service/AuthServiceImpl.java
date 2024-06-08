@@ -6,7 +6,6 @@ import com.evolutionaryeyes.auth_service.entity.UserCredential;
 import com.evolutionaryeyes.auth_service.feign.UserServiceInterface;
 import com.evolutionaryeyes.auth_service.repository.UserCredentialRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.netflix.discovery.converters.Auto;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,7 @@ import java.util.Optional;
 
 @Service
 @Slf4j
-public class AuthServiceImpl implements AuthService{
+public class AuthServiceImpl implements AuthService {
 
     @Autowired
     private UserCredentialRepository userCredentialRepository;
@@ -33,8 +32,10 @@ public class AuthServiceImpl implements AuthService{
 
     @Autowired
     private UserServiceInterface userServiceInterface;
+
     @Override
-    public String saveUser(UserCredentialDTO userCredentialDTO) {
+    public String saveUser(UserCredentialDTO userCredentialDTO)
+    {
         UserDTO userDTO = mapper.map(userCredentialDTO, UserDTO.class);
         log.info("Saving user.");
         userServiceInterface.saveUser(userDTO);
@@ -45,18 +46,22 @@ public class AuthServiceImpl implements AuthService{
         return "User has been saved";
     }
 
-    public String generateToken(UserCredentialDTO userCredential) throws JsonProcessingException {
+    public String generateToken(UserCredentialDTO userCredential) throws JsonProcessingException
+    {
         return jwtService.generateToken(userCredential);
     }
 
-    public void validateToken(String token) {
+    public void validateToken(String token)
+    {
         jwtService.validateToken(token);
     }
 
     @Override
-    public UserCredentialDTO findByUsername(String username) {
+    public UserCredentialDTO findByUsername(String username)
+    {
         Optional<UserCredential> userCredential = userCredentialRepository.findByUsername(username);
-        if (userCredential.isPresent()) {
+        if (userCredential.isPresent())
+        {
             return mapper.map(userCredential.get(), UserCredentialDTO.class);
         }
         throw new RuntimeException("user does not exist with username: " + username);

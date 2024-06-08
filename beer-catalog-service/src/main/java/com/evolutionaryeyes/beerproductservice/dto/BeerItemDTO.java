@@ -15,8 +15,6 @@ public class BeerItemDTO {
     private String description;
     private String brewery;
     private Double abv;
-    private Double ibu;
+    private int ibu;
     private String type;
-
-
 }
