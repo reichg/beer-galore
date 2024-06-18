@@ -1,4 +1,4 @@
-package com.evolutionaryeyes.beerproductservice.config;
+package com.evolutionaryeyes.beercatalogservice.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

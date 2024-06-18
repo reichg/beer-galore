@@ -1,9 +1,8 @@
-package com.evolutionaryeyes.beerproductservice.controller;
+package com.evolutionaryeyes.beercatalogservice.controller;
 
-import com.evolutionaryeyes.beerproductservice.dto.BeerItemDTO;
-import com.evolutionaryeyes.beerproductservice.service.BeerItemService;
+import com.evolutionaryeyes.beercatalogservice.dto.BeerItemDTO;
+import com.evolutionaryeyes.beercatalogservice.service.BeerItemService;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;

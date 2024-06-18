@@ -1,9 +1,8 @@
-package com.evolutionaryeyes.beerproductservice.service;
+package com.evolutionaryeyes.beercatalogservice.service;
 
-import com.evolutionaryeyes.beerproductservice.dto.BeerItemDTO;
+import com.evolutionaryeyes.beercatalogservice.dto.BeerItemDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Optional;

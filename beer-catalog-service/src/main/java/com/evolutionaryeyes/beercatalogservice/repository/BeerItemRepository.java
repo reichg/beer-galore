@@ -1,6 +1,6 @@
-package com.evolutionaryeyes.beerproductservice.repository;
+package com.evolutionaryeyes.beercatalogservice.repository;
 
-import com.evolutionaryeyes.beerproductservice.entity.BeerItem;
+import com.evolutionaryeyes.beercatalogservice.entity.BeerItem;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;

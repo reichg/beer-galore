@@ -1,4 +1,4 @@
-package com.evolutionaryeyes.beerproductservice.dto;
+package com.evolutionaryeyes.beercatalogservice.dto;
 
 
 import lombok.AllArgsConstructor;

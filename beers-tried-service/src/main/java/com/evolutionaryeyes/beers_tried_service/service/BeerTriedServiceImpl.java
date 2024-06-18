@@ -2,7 +2,7 @@ package com.evolutionaryeyes.beers_tried_service.service;
 
 import com.evolutionaryeyes.beers_tried_service.dto.BeerItemDTO;
 import com.evolutionaryeyes.beers_tried_service.dto.BeerTriedDTO;
-import com.evolutionaryeyes.beers_tried_service.feign.BeersTriedServiceInterface;
+import com.evolutionaryeyes.beers_tried_service.feign.BeerCatalogServiceInterface;
 import com.evolutionaryeyes.beers_tried_service.model.BeerTriedEntity;
 import com.evolutionaryeyes.beers_tried_service.repository.BeerTriedRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +25,7 @@ public class BeerTriedServiceImpl implements BeerTriedService {
     @Autowired
     Environment environment;
     @Autowired
-    private BeersTriedServiceInterface beersTriedServiceInterface;
+    private BeerCatalogServiceInterface beerCatalogServiceInterface;
 
     @Override
     public BeerTriedDTO createBeerTriedEvent(BeerTriedDTO beerTriedDTO)
@@ -78,7 +78,7 @@ public class BeerTriedServiceImpl implements BeerTriedService {
         List<Integer> beerTriedEntityIds = beerTriedRepository.findAllByUserId(userId);
         if (!beerTriedEntityIds.isEmpty())
         {
-            return beersTriedServiceInterface.getBeersByIds(beerTriedEntityIds).getBody();
+            return beerCatalogServiceInterface.getBeersByIds(beerTriedEntityIds).getBody();
         }
         return null;
     }

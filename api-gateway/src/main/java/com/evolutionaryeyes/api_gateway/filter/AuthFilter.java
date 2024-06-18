@@ -1,6 +1,7 @@
 package com.evolutionaryeyes.api_gateway.filter;
 
 import com.evolutionaryeyes.api_gateway.util.JwtUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 
 @Component
+@Slf4j
 public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> {
 
     @Autowired
@@ -44,10 +46,11 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> 
 
                 try
                 {
-                    System.out.println("checking token in header");
+                    log.info("checking token in header");
                     jwtUtil.validateToken(token);
 
                     request = exchange.getRequest().mutate().header("user", jwtUtil.extractUser(token)).build();
+                    log.info(request.getHeaders().get("user").get(0));
                 } catch (Exception e)
                 {
                     throw new RuntimeException("Unauthorized access to application.");
