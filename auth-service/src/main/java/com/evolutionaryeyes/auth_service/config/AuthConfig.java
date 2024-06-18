@@ -31,9 +31,13 @@ public class AuthConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception
     {
         return httpSecurity.csrf(AbstractHttpConfigurer::disable)
+                           .cors(AbstractHttpConfigurer::disable)
                            .authorizeHttpRequests(r -> r.requestMatchers("/auth/register",
                                                                          "/auth/generateToken",
-                                                                         "/auth/validateToken"
+                                                                         "/auth/validateToken",
+                                                                         "/swagger-ui/**",
+                                                                         "/v3/api-docs/**",
+                                                                         "/swagger-ui.html"
                            ).permitAll())
                            .build();
     }

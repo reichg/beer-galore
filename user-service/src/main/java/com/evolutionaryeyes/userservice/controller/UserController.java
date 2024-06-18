@@ -6,12 +6,18 @@ import com.evolutionaryeyes.userservice.dto.UserHomeDTO;
 import com.evolutionaryeyes.userservice.repository.UserRepository;
 import com.evolutionaryeyes.userservice.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import feign.Headers;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.util.List;
 
@@ -29,6 +35,9 @@ public class UserController {
     private UserService userService;
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private HttpServletRequest context;
 
     @GetMapping("{userId}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable int userId) throws Exception
@@ -56,10 +65,11 @@ public class UserController {
     }
 
     @GetMapping("{userId}/allTriedBeers")
-    public ResponseEntity<List<BeerItemDTO>> getAllTriedBeersByUserId(@PathVariable int userId,
-                                                                      @RequestHeader("user") String userHeader
+    public ResponseEntity<List<BeerItemDTO>> getAllTriedBeersByUserId(@PathVariable int userId
     ) throws Exception
     {
+        String userHeader = context.getHeader("user");
+
         log.info("user: " + userHeader);
         UserDTO userHeaderDTO = mapper.readValue(userHeader, UserDTO.class);
         log.info("userDTO: " + userHeaderDTO);
@@ -67,10 +77,11 @@ public class UserController {
     }
 
     @GetMapping("{userId}/home")
-    public ResponseEntity<UserHomeDTO> loadUserHomeInformation(@PathVariable int userId,
-                                                               @RequestHeader("user") String userHeader
+    public ResponseEntity<UserHomeDTO> loadUserHomeInformation(@PathVariable int userId
     ) throws Exception
     {
+        String userHeader = context.getHeader("user");
+
         log.info("user: " + userHeader);
         UserDTO userHeaderDTO = mapper.readValue(userHeader, UserDTO.class);
         log.info("`userDTO: " + userHeaderDTO);

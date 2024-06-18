@@ -11,8 +11,8 @@ spring:
           filters:
             - AuthFilter
 
-        - id: beer-product-service
-          uri: lb://beer-product-service
+        - id: beer-catalog-service
+          uri: lb://beer-catalog-service
           predicates:
             - Path=/api/beer/**
           filters:

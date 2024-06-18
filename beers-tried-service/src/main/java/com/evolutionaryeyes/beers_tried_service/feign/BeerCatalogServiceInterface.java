@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@FeignClient("BEER-PRODUCT-SERVICE")
-public interface BeersTriedServiceInterface {
+@FeignClient("BEER-CATALOG-SERVICE")
+public interface BeerCatalogServiceInterface {
     @GetMapping("api/beer/beers-by-ids")
     public ResponseEntity<List<BeerItemDTO>> getBeersByIds(@RequestParam List<Integer> ids) throws Exception;
 }
