@@ -1,10 +1,10 @@
-package com.evolutionaryeyes.beerproductservice;
+package com.evolutionaryeyes.beercatalogservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BeerProductServiceApplicationTests {
+class BeerCatalogServiceApplicationTests {
 
     @Test
     void contextLoads()

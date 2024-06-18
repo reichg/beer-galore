@@ -1,6 +1,6 @@
-package com.evolutionaryeyes.beerproductservice.entity;
+package com.evolutionaryeyes.beercatalogservice.entity;
 
-import com.evolutionaryeyes.beerproductservice.dto.BeerItemDTO;
+import com.evolutionaryeyes.beercatalogservice.dto.BeerItemDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

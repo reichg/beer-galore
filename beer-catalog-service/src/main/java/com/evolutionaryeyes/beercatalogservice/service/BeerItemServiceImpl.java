@@ -1,10 +1,10 @@
-package com.evolutionaryeyes.beerproductservice.service;
+package com.evolutionaryeyes.beercatalogservice.service;
 
-import com.evolutionaryeyes.beerproductservice.dto.BeerItemDTO;
-import com.evolutionaryeyes.beerproductservice.dto.BeerTriedDTO;
-import com.evolutionaryeyes.beerproductservice.entity.BeerItem;
-import com.evolutionaryeyes.beerproductservice.feign.BeerItemServiceInterface;
-import com.evolutionaryeyes.beerproductservice.repository.BeerItemRepository;
+import com.evolutionaryeyes.beercatalogservice.dto.BeerItemDTO;
+import com.evolutionaryeyes.beercatalogservice.dto.BeerTriedDTO;
+import com.evolutionaryeyes.beercatalogservice.entity.BeerItem;
+import com.evolutionaryeyes.beercatalogservice.feign.BeersTriedServiceInterface;
+import com.evolutionaryeyes.beercatalogservice.repository.BeerItemRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class BeerItemServiceImpl implements BeerItemService {
     ModelMapper mapper;
 
     @Autowired
-    BeerItemServiceInterface beerItemServiceInterface;
+    BeersTriedServiceInterface beersTriedServiceInterface;
 
     @Override
     public Page<BeerItemDTO> getAllBeerItems(Optional<Integer> page,
@@ -107,8 +107,7 @@ public class BeerItemServiceImpl implements BeerItemService {
         {
             beerItem.get().fromDto(beerItemDTO);
             BeerItem updatedBeerItem = beerItemRepository.save(beerItem.get());
-            BeerItemDTO updatedBeerItemDTO = mapper.map(updatedBeerItem, BeerItemDTO.class);
-            return updatedBeerItemDTO;
+            return mapper.map(updatedBeerItem, BeerItemDTO.class);
         } else
         {
             throw new Exception("Beer item with id: " + id + " does not exist.");
@@ -128,7 +127,7 @@ public class BeerItemServiceImpl implements BeerItemService {
                                                     .rating(rating)
                                                     .build();
             BeerItemDTO userSavedBeerItemDTO = mapper.map(beerItem.get(), BeerItemDTO.class);
-            BeerTriedDTO savedBeerTriedDTO = beerItemServiceInterface.createBeerTriedEvent(beerTriedDTO).getBody();
+            BeerTriedDTO savedBeerTriedDTO = beersTriedServiceInterface.createBeerTriedEvent(beerTriedDTO).getBody();
             log.info("added beer item with id: " + savedBeerTriedDTO.getBeerItemId());
             log.info("BeerTried: " + savedBeerTriedDTO);
             return userSavedBeerItemDTO;

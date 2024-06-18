@@ -1,6 +1,7 @@
 package com.evolutionaryeyes.auth_service.controller;
 
 import com.evolutionaryeyes.auth_service.dto.UserCredentialDTO;
+import com.evolutionaryeyes.auth_service.dto.UserCredentialGenerateTokenDTO;
 import com.evolutionaryeyes.auth_service.feign.UserServiceInterface;
 import com.evolutionaryeyes.auth_service.service.AuthService;
 import lombok.extern.slf4j.Slf4j;
@@ -38,16 +39,16 @@ public class UserCredentialController {
         return authService.saveUser(userCredentialDTO);
     }
 
-    @GetMapping("generateToken")
-    public String getToken(@RequestBody UserCredentialDTO userCredentialDTO) throws Exception
+    @PostMapping("generateToken")
+    public String getToken(@RequestBody UserCredentialGenerateTokenDTO userCredentials) throws Exception
     {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                userCredentialDTO.getUsername(),
-                userCredentialDTO.getPassword()
+                userCredentials.getUsername(),
+                userCredentials.getPassword()
         ));
         if (authentication.isAuthenticated())
         {
-            UserCredentialDTO existingUserCredentials = authService.findByUsername(userCredentialDTO.getUsername());
+            UserCredentialDTO existingUserCredentials = authService.findByUsername(userCredentials.getUsername());
             return authService.generateToken(existingUserCredentials);
         } else
         {
