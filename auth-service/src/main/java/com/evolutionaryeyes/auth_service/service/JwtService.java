@@ -8,6 +8,7 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
@@ -19,7 +20,8 @@ import java.util.Map;
 @Slf4j
 public class JwtService {
 
-    String SECRET = "nUnySPRDeX3bt54xAXFMTYc5SXDnGguzKEkof5qMhE252WJn6M9fBJXbBqkehqWeqhuFuFx99y4xrSCBgJ6J38MowTh3ekpXJMUj3T97qhGAkmyoG9whxeqhap5yroxAEhL6uW6UqSYwosaJ42jBCmaGGfE6oYAoGPwhBjEyaPpCBT9ZTwJWPWpyeh9F3D7h3JxoHCZEn3k3rWDu3p3XunEgqGcbzREuUSuRNgxbaZHdQCTDRsUNcRADUpYUR4Bh";
+    @Value("${client.SECRET_KEY}")
+    String SECRET;
 
     @Autowired
     ObjectMapper mapper;
