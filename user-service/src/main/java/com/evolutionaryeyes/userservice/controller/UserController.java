@@ -39,13 +39,13 @@ public class UserController {
     @Autowired
     private HttpServletRequest context;
 
-    @GetMapping("{userId}")
+    @GetMapping("{user-id}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable int userId) throws Exception
     {
         return ResponseEntity.status(HttpStatus.OK).body(userService.getUserById(userId));
     }
 
-    @PostMapping("saveUser")
+    @PostMapping("save-user")
     public ResponseEntity<UserDTO> saveUser(@RequestBody UserDTO userDto)
     {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.saveUser(userDto));
@@ -64,7 +64,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(userService.deleteUserById(userId));
     }
 
-    @GetMapping("{userId}/allTriedBeers")
+    @GetMapping("{userId}/all-tried-beers")
     public ResponseEntity<List<BeerItemDTO>> getAllTriedBeersByUserId(@PathVariable int userId
     ) throws Exception
     {

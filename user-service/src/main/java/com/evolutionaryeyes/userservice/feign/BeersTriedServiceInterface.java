@@ -10,7 +10,7 @@ import java.util.List;
 
 @FeignClient("BEERS-TRIED-SERVICE")
 public interface BeersTriedServiceInterface {
-    @GetMapping("api/tried-beer/getTriedBeersByUserId")
+    @GetMapping("api/tried-beer/get-tried-beers-by-user-id")
     public ResponseEntity<List<BeerItemDTO>> getBeersTriedByUserId(@RequestParam int userId
     ) throws Exception;
 }

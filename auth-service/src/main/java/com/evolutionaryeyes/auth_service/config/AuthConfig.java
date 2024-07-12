@@ -33,8 +33,8 @@ public class AuthConfig {
         return httpSecurity.csrf(AbstractHttpConfigurer::disable)
                            .cors(AbstractHttpConfigurer::disable)
                            .authorizeHttpRequests(r -> r.requestMatchers("/auth/register",
-                                                                         "/auth/generateToken",
-                                                                         "/auth/validateToken",
+                                                                         "/auth/login",
+                                                                         "/auth/validate-token",
                                                                          "/swagger-ui/**",
                                                                          "/v3/api-docs/**",
                                                                          "/swagger-ui.html"

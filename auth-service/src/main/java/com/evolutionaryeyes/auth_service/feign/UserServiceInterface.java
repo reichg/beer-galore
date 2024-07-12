@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @FeignClient("USER-SERVICE")
 public interface UserServiceInterface {
-    @PostMapping("api/user/saveUser")
+    @PostMapping("api/user/save-user")
     public ResponseEntity<UserDTO> saveUser(@RequestBody UserDTO userDto);
 }

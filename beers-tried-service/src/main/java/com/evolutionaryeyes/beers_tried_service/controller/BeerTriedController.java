@@ -40,7 +40,7 @@ public class BeerTriedController {
         return ResponseEntity.status(HttpStatus.CREATED).body(beerTriedService.updateBeerTriedEvent(userId, beerItemId, beerTriedDTO));
     }
 
-    @GetMapping("getTriedBeersByUserId")
+    @GetMapping("get-tried-beers-by-user-id")
     public ResponseEntity<List<BeerItemDTO>> getBeersTriedByUserId(@RequestParam int userId) throws Exception
     {
         return ResponseEntity.status(HttpStatus.OK).body(beerTriedService.getTriedBeerByUserId(userId));

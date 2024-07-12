@@ -39,7 +39,7 @@ public class UserCredentialController {
         return authService.saveUser(userCredentialDTO);
     }
 
-    @PostMapping("generateToken")
+    @PostMapping("login")
     public String getToken(@RequestBody UserCredentialGenerateTokenDTO userCredentials) throws Exception
     {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
@@ -56,7 +56,7 @@ public class UserCredentialController {
         }
     }
 
-    @GetMapping("validateToken")
+    @GetMapping("validate-token")
     public String validateToken(@RequestParam String token)
     {
         authService.validateToken(token);
