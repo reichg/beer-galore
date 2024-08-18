@@ -136,14 +136,22 @@ public class BeerItemServiceImpl implements BeerItemService {
     }
 
     @Override
-    public List<BeerItemDTO> getBeersByIds(List<Integer> ids)
+    public Page<BeerItemDTO> getBeersByIds(List<Integer> ids, Optional<Integer> page,
+                                           Optional<Integer> size,
+                                           Optional<String> sortBy,
+                                           Optional<Sort.Direction> sortDirection)
     {
-        List<BeerItem> beerItems = beerItemRepository.findAllById(ids);
-        List<BeerItemDTO> beerItemDTOs = beerItems.stream()
-                                                  .map(beerItem -> mapper.map(beerItem, BeerItemDTO.class))
-                                                  .toList();
-        log.info("found beer items: " + beerItemDTOs);
-        return beerItemDTOs;
+        PageRequest pageRequest = PageRequest.of(page.orElse(0),
+                                                 size.orElse(10),
+                                                 sortDirection.orElse(Sort.Direction.ASC),
+                                                 sortBy.orElse("name")
+        );
+        Page<BeerItem> beerItems = beerItemRepository.findAllByIds(ids, pageRequest);
+//        List<BeerItemDTO> beerItemDTOs = beerItems.stream()
+//                                                  .map(beerItem -> mapper.map(beerItem, BeerItemDTO.class))
+//                                                  .toList();
+//        log.info("found beer items: " + beerItemDTOs);
+        return beerItems.map(beerItem -> mapper.map(beerItem, BeerItemDTO.class));
     }
 
 

@@ -9,6 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -71,14 +74,15 @@ public class BeerTriedServiceImpl implements BeerTriedService {
     }
 
     @Override
-    public List<BeerItemDTO> getTriedBeerByUserId(int userId
+    public Page<BeerItemDTO> getTriedBeerByUserId(int userId
     ) throws Exception
     {
-        log.info("getting from service port: " + environment.getProperty("local.server.port"));
+
+        PageRequest pageRequest = PageRequest.of(0, 10, Sort.Direction.ASC, "name");
         List<Integer> beerTriedEntityIds = beerTriedRepository.findAllByUserId(userId);
         if (!beerTriedEntityIds.isEmpty())
         {
-            return beerCatalogServiceInterface.getBeersByIds(beerTriedEntityIds).getBody();
+            return beerCatalogServiceInterface.getBeersByIds(beerTriedEntityIds, pageRequest).getBody();
         }
         return null;
     }

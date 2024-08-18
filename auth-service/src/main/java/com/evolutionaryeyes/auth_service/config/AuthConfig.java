@@ -16,6 +16,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -27,11 +34,12 @@ public class AuthConfig {
         return new CustomUserDetailsService();
     }
 
+    
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception
     {
         return httpSecurity.csrf(AbstractHttpConfigurer::disable)
-                           .cors(AbstractHttpConfigurer::disable)
                            .authorizeHttpRequests(r -> r.requestMatchers("/auth/register",
                                                                          "/auth/login",
                                                                          "/auth/validate-token",

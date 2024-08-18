@@ -36,6 +36,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public String saveUser(UserCredentialDTO userCredentialDTO)
     {
+        log.info(String.valueOf(userCredentialDTO));
         UserDTO userDTO = mapper.map(userCredentialDTO, UserDTO.class);
         log.info("Saving user.");
         userServiceInterface.saveUser(userDTO);
@@ -48,6 +49,7 @@ public class AuthServiceImpl implements AuthService {
 
     public String generateToken(UserCredentialDTO userCredential) throws JsonProcessingException
     {
+        log.info(String.valueOf(userCredential));
         return jwtService.generateToken(userCredential);
     }
 

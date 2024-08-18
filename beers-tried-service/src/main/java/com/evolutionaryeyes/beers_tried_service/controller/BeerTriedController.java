@@ -5,6 +5,7 @@ import com.evolutionaryeyes.beers_tried_service.dto.BeerTriedDTO;
 import com.evolutionaryeyes.beers_tried_service.service.BeerTriedService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,7 +42,7 @@ public class BeerTriedController {
     }
 
     @GetMapping("get-tried-beers-by-user-id")
-    public ResponseEntity<List<BeerItemDTO>> getBeersTriedByUserId(@RequestParam int userId) throws Exception
+    public ResponseEntity<Page<BeerItemDTO>> getBeersTriedByUserId(@RequestParam int userId) throws Exception
     {
         return ResponseEntity.status(HttpStatus.OK).body(beerTriedService.getTriedBeerByUserId(userId));
     }

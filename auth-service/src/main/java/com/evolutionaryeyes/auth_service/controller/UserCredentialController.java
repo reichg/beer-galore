@@ -7,6 +7,7 @@ import com.evolutionaryeyes.auth_service.service.AuthService;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -40,8 +41,9 @@ public class UserCredentialController {
     }
 
     @PostMapping("login")
-    public String getToken(@RequestBody UserCredentialGenerateTokenDTO userCredentials) throws Exception
+    public ResponseEntity<UserCredentialDTO> getToken(@RequestBody UserCredentialGenerateTokenDTO userCredentials) throws Exception
     {
+        log.info("hitting login");
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 userCredentials.getUsername(),
                 userCredentials.getPassword()
@@ -49,7 +51,9 @@ public class UserCredentialController {
         if (authentication.isAuthenticated())
         {
             UserCredentialDTO existingUserCredentials = authService.findByUsername(userCredentials.getUsername());
-            return authService.generateToken(existingUserCredentials);
+            existingUserCredentials.setToken(authService.generateToken(existingUserCredentials));
+            return ResponseEntity.ok().body(existingUserCredentials);
+            //header("token", authService.generateToken(existingUserCredentials))
         } else
         {
             throw new Exception("invalid access");

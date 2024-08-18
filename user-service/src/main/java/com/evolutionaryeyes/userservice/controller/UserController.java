@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
@@ -65,7 +66,7 @@ public class UserController {
     }
 
     @GetMapping("{userId}/all-tried-beers")
-    public ResponseEntity<List<BeerItemDTO>> getAllTriedBeersByUserId(@PathVariable int userId
+    public ResponseEntity<Page<BeerItemDTO>> getAllTriedBeersByUserId(@PathVariable int userId
     ) throws Exception
     {
         String userHeader = context.getHeader("user");

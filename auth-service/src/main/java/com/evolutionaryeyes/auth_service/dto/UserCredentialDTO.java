@@ -19,4 +19,5 @@ public class UserCredentialDTO {
     private String phone;
     private int age;
     private String roles;
+    private String token;
 }

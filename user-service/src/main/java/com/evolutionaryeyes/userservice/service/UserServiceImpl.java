@@ -9,6 +9,7 @@ import com.evolutionaryeyes.userservice.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private ModelMapper mapper;
     @Autowired
-    private BeersTriedServiceInterface userServiceInterface;
+    private BeersTriedServiceInterface beersTriedServiceInterface;
 
     @Override
     public UserDTO saveUser(UserDTO userDto)
@@ -90,7 +91,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<BeerItemDTO> getAllTriedBeersByUserId(int userId, UserDTO userHeaderDTO
+    public Page<BeerItemDTO> getAllTriedBeersByUserId(int userId, UserDTO userHeaderDTO
     ) throws Exception
     {
         log.info("url userId: " + userId + " logged in userId: " + userHeaderDTO.getUserId());
@@ -100,7 +101,7 @@ public class UserServiceImpl implements UserService {
             throw new Exception("not allowed to access other users' beer lists.");
         }
 
-        return userServiceInterface.getBeersTriedByUserId(userId).getBody();
+        return beersTriedServiceInterface.getBeersTriedByUserId(userId).getBody();
 
     }
 
@@ -118,7 +119,8 @@ public class UserServiceImpl implements UserService {
         if (existingUser.isPresent())
         {
             UserHomeDTO userHomeDTO = mapper.map(existingUser.get(), UserHomeDTO.class);
-            List<BeerItemDTO> usersBeerItemDTOs = userServiceInterface.getBeersTriedByUserId(userId).getBody();
+            System.out.println(userHomeDTO);
+            Page<BeerItemDTO> usersBeerItemDTOs = beersTriedServiceInterface.getBeersTriedByUserId(userId).getBody();
             userHomeDTO.setTriedBeers(usersBeerItemDTOs);
             return userHomeDTO;
         }

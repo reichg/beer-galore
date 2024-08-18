@@ -29,7 +29,10 @@ public interface BeerItemService {
     BeerItemDTO addBeerItemToUserList(int beerItemId, int userId, int rating
     );
 
-    List<BeerItemDTO> getBeersByIds(List<Integer> ids);
+    Page<BeerItemDTO> getBeersByIds(List<Integer> ids, Optional<Integer> page,
+                                    Optional<Integer> size,
+                                    Optional<String> sortBy,
+                                    Optional<Sort.Direction> sortDirection);
 
     Page<BeerItemDTO> getBeerItemsWithSearch(Optional<Integer> page,
                                                              Optional<Integer> size,

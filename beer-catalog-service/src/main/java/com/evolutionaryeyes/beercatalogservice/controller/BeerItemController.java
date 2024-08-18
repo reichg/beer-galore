@@ -47,9 +47,12 @@ public class BeerItemController {
     }
 
     @GetMapping("beers-by-ids")
-    public ResponseEntity<List<BeerItemDTO>> getBeersByIds(@RequestParam List<Integer> ids) throws Exception
+    public ResponseEntity<Page<BeerItemDTO>> getBeersByIds(@RequestParam List<Integer> ids, @RequestParam Optional<Integer> page,
+                                                           @RequestParam Optional<Integer> size,
+                                                           @RequestParam Optional<String> sortBy,
+                                                           @RequestParam Optional<Sort.Direction> sortDirection) throws Exception
     {
-        return ResponseEntity.status(HttpStatus.OK).body(beerItemService.getBeersByIds(ids));
+        return ResponseEntity.status(HttpStatus.OK).body(beerItemService.getBeersByIds(ids, page, size, sortBy, sortDirection));
     }
 
     @PostMapping("save-a-beer")
