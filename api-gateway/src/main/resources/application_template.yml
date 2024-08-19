@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/api/user/**
+          filters:
+            - AuthFilter
+
+        - id: beer-catalog-service
+          uri: lb://beer-catalog-service
+          predicates:
+            - Path=/api/beer/**
+          filters:
+            - AuthFilter
+
+        - id: beers-tried-service
+          uri: lb://beers-tried-service
+          predicates:
+            - Path=/api/tried-beer/**
+          filters:
+            - AuthFilter
+
+        - id: auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/auth/**
+
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+client:
+  SECRET_KEY: <create SECRET_KEY>
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${random.int}
+server:
+  port: 0
